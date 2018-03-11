@@ -1,0 +1,61 @@
+
+#线性表的顺序存储
+
+/********************************************************************
+线性表的连续存储获取元素的效率特别高，但是删除和加入新的元素的效率偏低，
+所以适合应用在不是经常新增或者删除元素的应用场景，适合应用到频繁读取元‘
+素的应用场景中。需要频繁的删除和新增元素的应用宜采用链表线性表。
+********************************************************************/
+
+/*定义线性表的顺序存储数据结构*/
+#define MAXSIZE 20
+typedef int ElemType;
+typedef struct{
+	ElemType data[MAXSIZE];
+	int Length;
+}Sqlist
+
+#define OK 1
+#define ERROR 0
+#define TURE 1
+#define FALSE 0
+typedef int status
+
+/*获取元素*/
+status GetElem(Sqlist *L, int i, ElemType *e)
+{
+	if(L->Length == 0 || i < 0 || i > MAXSIZE)
+		return ERROR;
+	*e = L->data[i];
+	return OK;  
+}
+ 
+
+/*插入元素*/
+status ListInsert(Sqlist *L, int i, ElemType e)
+{
+	int j;
+	if(L == NULL || i < 0 || i > L->length+1 || L->length == MAXSIZE)
+		return ERROR;
+	for(j = L->Length-1; j>=i; j--)
+		L->data[j+1] = L->data[j];
+	L->data[i-1] = e;
+	L->Length++;
+	return OK;
+}
+
+
+/*删除元素并返回删除元素的值*/
+status ListDelete(Sqlist *L, int i, ElemType *e)
+{
+	int j;
+	if(L->length == 0 || i < 0 || i > L->Length)
+		return ERROR;
+	*e = L->data[i-1];
+	for(j = i-1; j < L->Length -1; j++)
+		L->data[j] = L->data[++j];
+	L->Length = L->Length--;
+	return OK;
+}
+
+
