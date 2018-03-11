@@ -1,0 +1,102 @@
+
+#链表表示的线性表
+
+/****************************************************************************
+链表表示的现象表是用指针将各个node链接起来，他们并不是存储在连续的物理地址上，
+从链表表示的线性表中读取元素的效率较低（需要遍历线性表），但是删除或者新增元素
+的效率则相对会比较高。
+****************************************************************************/
+
+#线性表的单链表结构
+
+typedef struct{
+	Elemtype data;
+	Node *next;
+}Node;
+
+#定义线性表
+
+typedef struct Node *LinkList;
+
+/*单链表的读取*/
+
+Status GetElem(LinkList *L, int i, ElemType *e)
+{
+	LinkList *p;
+	int j;
+
+	if(L->next == NULL)
+		return ERROR;
+	p = L;
+
+	for(j = 0; j<i; j++){
+		p = p->next; 
+		if(p == NULL)
+			break;	
+	}
+
+	if(!P || j > i)
+		return ERROR;
+	else
+	e = p->data;	
+
+	return OK;
+}
+ 
+
+/*单链表的删除*/
+
+Status ListInsert(LinkList *L, int i, Elemtype *e)
+{
+	int j;
+	LinkList *p,s;
+
+	if(L->next == NULL)
+		return ERROR;
+	p = L;
+
+	for(j = 0; j < i; j++){
+		p = p->next;
+		if(p == NULL)
+			break;	
+	}
+
+	if(!p)
+		return ERROR;
+
+	s = (LinkList)malloc(sizeof(Node));
+	s->data = e;
+	s->next = q->next;
+	q->next = &s;
+
+	return OK;
+}
+
+
+/*单链表的删除*/
+
+Status LinkList(LinkList *L, int i, ElemType *e)
+{
+	int j;
+	LinkList *p,q;
+
+	if(L == NULL)
+		return ERROR;
+
+	p = L;
+	for(j=0; j<i; j++){
+		p = p->next;
+		if(p == NULL)
+			break;
+	} 	
+	if(!p)
+		return ERROR;
+
+	q = p->next;
+	p->next = q->next;
+
+	*e = q->data;
+	free(q);
+
+	return OK;
+}
